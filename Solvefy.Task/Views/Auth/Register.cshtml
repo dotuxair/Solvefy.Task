@@ -1,0 +1,91 @@
+﻿@model Solvefy.Task.Models.Dtos.UserSignupDto
+
+@{
+    ViewData["Title"] = "Sign In - Solvefy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius:10px">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-5 d-none d-md-block mt-5">
+                            <img src="~/images/register.jpg"
+                                 alt="login form"
+                                 class="img-fluid" />
+                        </div>
+                        <div class="col-md-6 col-lg-7">
+                            <div class="card-body p-4 p-lg-5 text-black">
+                                <form asp-action="Register">
+                                    <span class="fs-5 me-3">Join</span>
+                                    <span class="fw-bold text-danger" style="font-size: 40px">Solvefy</span>
+                                    @if (ViewBag.Error != null)
+                                    {
+                                        <div class="alert alert-danger">@ViewBag.Error</div>
+                                    }
+                                    <div class="form-outline mb-3">
+                                        <label class="form-label">Name <span class="text-danger">*</span></label>
+                                        <input type="text"
+                                               class="form-control"
+                                               asp-for="Name"
+                                               placeholder="e.g your-name" />
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+
+                                    </div>
+                                    <div class="form-outline mb-3">
+                                        <label class="form-label">Email <span class="text-danger">*</span></label>
+                                        <input type="text"
+                                               class="form-control"
+                                               asp-for="Email"
+                                               placeholder="e.g your-email@abc.com" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                                    </div>
+
+                                    <div class="form-outline mb-2">
+                                        <label class="form-label">Password <span class="text-danger">*</span></label>
+                                        <input type="password"
+                                               class="form-control"
+                                               asp-for="Password" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+
+                                    </div>
+                                    <div class="form-outline mb-2">
+                                        <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                                        <input type="password"
+                                               class="form-control"
+                                               asp-for="ConfirmPassword" />
+                                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+                                    </div>
+
+                                    <button class="btn btn-primary btn-block form-control"
+                                            type="submit">
+                                        Register
+                                    </button>
+
+                                </form>
+
+                                <div class="d-flex justify-content-center mt-2">
+                                    <span class="text-muted">Already have an account.</span>&nbsp;
+                                    <a class="text-decoration-none" asp-action="Login" asp-controller="Auth">
+                                        <span class="text-primary"> SignIn here.</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,100 @@
+﻿@model Solvefy.Task.Models.Dtos.AddProductDto
+
+@{
+    ViewData["Title"] = "Add Product";
+    Layout = "~/Views/Shared/_SharedLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between mt-4">
+    <span class="fs-5 fw-bold">Add Product</span>
+    <a class="btn btn-sm btn-outline-primary" asp-action="Index">View All Products</a>
+</div>
+<hr />
+<form id="productForm" asp-action="AddProduct" enctype="multipart/form-data" method="post" onsubmit="return validateForm()">
+    <div class="form-outline mb-2">
+        <label class="form-label">Product Name <span class="text-danger">*</span></label>
+        <input type="text"
+               class="form-control"
+               asp-for="ProductName"
+               id="productName" />
+        <span asp-validation-for="ProductName" class="text-danger"></span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-outline mb-2">
+                <label class="form-label">Price <span class="text-danger">*</span></label>
+                <input type="number"
+                       step="0.01"
+                       class="form-control"
+                       asp-for="Price"
+                       id="price" />
+                <span asp-validation-for="Price" class="text-danger" id="price-error"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-outline mb-2">
+                <label class="form-label">Quantity <span class="text-danger">*</span></label>
+                <input type="number"
+                       class="form-control"
+                       asp-for="Quantity"
+                       id="quantity" />
+                <span asp-validation-for="Quantity" class="text-danger" id="quantity-error"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-outline mb-2">
+        <label class="form-label">Product Description <span class="text-danger">*</span></label>
+        <textarea type="text"
+                  class="form-control"
+                  asp-for="Description"
+                  id="description"
+                  rows="3">
+        </textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-outline mb-2">
+        <label class="form-label">Image <span class="text-danger">*</span></label>
+        <input type="file"
+               class="form-control"
+               id="image"
+               name="file"
+               required />
+    </div>
+
+    <button class="btn btn-primary mt-2" type="submit">Add Product</button>
+</form>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        function validateForm() {
+            var isValid = true;
+
+            var price = document.getElementById("price").value;
+            var quantity = document.getElementById("quantity").value;
+
+            if (price === "" || price <= 0) {
+                document.getElementById("price-error").textContent = "Price cannot be empty or less than zero.";
+                isValid = false;
+            } else {
+                document.getElementById("price-error").textContent = "";
+            }
+
+            if (quantity === "" || quantity <= 0) {
+                document.getElementById("quantity-error").textContent = "Quantity cannot be empty or less than zero.";
+                isValid = false;
+            } else {
+                document.getElementById("quantity-error").textContent = "";
+            }
+
+         
+
+            return isValid;
+        }
+    </script>
+}

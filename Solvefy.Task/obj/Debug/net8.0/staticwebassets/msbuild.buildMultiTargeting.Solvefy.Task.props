@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Solvefy.Task.props" />
+</Project>
